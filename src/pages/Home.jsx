@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import BookCard from "../components/BookCard";
 import { Link } from 'react-router-dom';
 
+
 function Home (){
     const [query, setQuery] = useState('');
     const [books, setBooks] = useState([]);
@@ -22,7 +23,7 @@ function Home (){
   ))}
   <br />
   <br />
-  <Link to = "/SavedBooks"><button style={{width: '10rem',height:'3rem',backgroundColor: '#0099ff', color: 'white',fontSize:"22px" ,borderRadius:'48%',border:'none'}}    type="submit">Saved Books</button></Link>
+  <Link to = "/saved"><button style={{width: '10rem',height:'3rem',backgroundColor: '#0099ff', color: 'white',fontSize:"22px" ,borderRadius:'48%',border:'none'}}    type="submit">Saved Books</button></Link>
              
         </div>
     )

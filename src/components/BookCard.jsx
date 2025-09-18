@@ -1,5 +1,18 @@
 function BookCard({book}) {
     const {title,authors,imageLinks} = book.volumeInfo
+        function onButtonClick(book) {
+ 
+  let savedData = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : []
+  
+  const bookExists = savedData.some(savedBook => savedBook.id === book.id);
+
+  if (!bookExists) {
+    savedData.push(book)
+  }
+
+ 
+  localStorage.setItem('books', JSON.stringify(savedData))
+}
   return (
     
     <div>
@@ -10,7 +23,7 @@ function BookCard({book}) {
           <p className="card-text">
            {authors}
           </p>
-          <a href="#" className="btn btn-primary">Details</a>
+          <button style={{backgroundColor: '#0099ff', color: 'white' }}  onClick={onButtonClick} type="submit">Save</button>
         </div>
       </div>
     </div>
