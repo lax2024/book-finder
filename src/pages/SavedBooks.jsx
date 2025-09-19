@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom"
+import  { useState } from 'react';
 
 
 
 
 function SavedBooks () {
  
-  let savedBooks = localStorage.getItem('savedbooks') 
-  ? JSON.parse(localStorage.getItem('savedbooks')) 
-  : [];
+const [savedBooks, setSavedBooks] = useState( () => {
+  const books = localStorage.getItem('savedbooks');
+  return books ? JSON.parse(books) : [];
+});
 
   function removeBook(id) {
-  let savedBooks = JSON.parse(localStorage.getItem('savedbooks')) || [];
-  savedBooks = savedBooks.filter(book => book.id !== id);
-  localStorage.setItem('savedbooks', JSON.stringify(savedBooks));
-
-  
-
-  
+  const updatedBooks = savedBooks.filter(book => book.id !== id);
+  localStorage.setItem('savedbooks', JSON.stringify(updatedBooks));
+  setSavedBooks(updatedBooks);
 }
+
+
 
 
     return(
