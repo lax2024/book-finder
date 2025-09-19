@@ -7,11 +7,19 @@ function Home (){
     const [query, setQuery] = useState('');
     const [books, setBooks] = useState([]);
 
-    const searchBooks = async () => {
-      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-      const data = await res.json();
-      setBooks(data.items || []);
-    };
+const searchBooks = async () => {
+  if (!query) return; 
+  try {
+    const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const data = await res.json();
+    setBooks(data.items || []);
+  } catch (error) {
+    console.error("Failed to fetch books:", error);
+  }
+};
 
     return(
         <div style={{textAlign: 'center'}}>

@@ -2,7 +2,7 @@ function BookCard({book}) {
     const {title,authors,imageLinks} = book.volumeInfo
         function onButtonClick(book) {
  
-  let savedData = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : []
+  let savedData = localStorage.getItem('savedbooks') ? JSON.parse(localStorage.getItem('savedbooks')) : []
   
   const bookExists = savedData.some(savedBook => savedBook.id === book.id);
 
@@ -11,7 +11,7 @@ function BookCard({book}) {
   }
 
  
-  localStorage.setItem('books', JSON.stringify(savedData))
+  localStorage.setItem('savedbooks', JSON.stringify(savedData))
 }
   return (
     
@@ -23,7 +23,14 @@ function BookCard({book}) {
           <p className="card-text">
            {authors}
           </p>
-          <button style={{backgroundColor: '#0099ff', color: 'white' }}  onClick={onButtonClick} type="submit">Save</button>
+          <button
+  style={{ backgroundColor: '#0099ff', color: 'white' }}
+  onClick={() => onButtonClick(book)}
+  type="button"
+>
+  Save
+</button>
+
         </div>
       </div>
     </div>

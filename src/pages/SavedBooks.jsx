@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom"
 
 
+
+
 function SavedBooks () {
+ 
+  let savedBooks = localStorage.getItem('savedbooks') 
+  ? JSON.parse(localStorage.getItem('savedbooks')) 
+  : [];
+
+  function removeBook(id) {
+  let savedBooks = JSON.parse(localStorage.getItem('savedbooks')) || [];
+  savedBooks = savedBooks.filter(book => book.id !== id);
+  localStorage.setItem('savedbooks', JSON.stringify(savedBooks));
+
+  
+
+  
+}
 
 
     return(
@@ -16,6 +32,26 @@ function SavedBooks () {
   </div>
 </nav>
 <h1 style={{textAlign:"center"}}>Saved Books</h1>
+{savedBooks.length === 0 ? (
+        <p>No saved books yet.</p>
+      ) : (
+        savedBooks.map(book => {
+          const { title, authors, imageLinks } = book.volumeInfo || {};
+
+          return (
+            <div key={book.id} className="card" style={{ width: '18rem' }}>
+              <img src={imageLinks?.thumbnail} alt={title} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">{title}</h5>
+                <p className="card-text">{authors?.join(', ')}</p>
+              </div>
+              <button onClick={() => removeBook(book.id)}>Remove</button>
+            </div>
+          );
+        })
+      )}
+
+
 
         </div>
     )
